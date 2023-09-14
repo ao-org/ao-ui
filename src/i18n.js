@@ -130,7 +130,9 @@ const resources = {
       'alignment': 'Alignment',
       'clan-level': 'Clan level',
       'admission-application': 'Admission application',
-      'request-admission': 'Request admission'
+      'request-admission': 'Request admission',
+      'reload-character-warning': 'For safety, reload your character after the transaction is complete.',
+      'deny': 'deny'
     }
   },
   es: {
@@ -292,7 +294,10 @@ const resources = {
       'alignment': 'Alineación',
       'clan-level': 'Nivel del clan',
       'admission-application': 'Solicitud de ingreso',
-      'request-admission': 'Solicitar ingreso'
+      'request-admission': 'Solicitar ingreso',
+      'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.',
+      'deny': 'Rechazar',
+      'credits': 'Créditos'
     }
   }
 };

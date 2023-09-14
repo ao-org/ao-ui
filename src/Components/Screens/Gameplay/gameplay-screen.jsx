@@ -20,6 +20,7 @@ import { isToggleEnabled, selectHideHotkeys, setHideHotkeys } from '../../../red
 import { SettingsDialog } from '../../Dialogs/Gameplay/Settings/settings-dialog'
 import GameBarButton from '../../Common/ao-button/GameBarButton/game-bar-button'
 import { AoStore } from '../../Dialogs/Gameplay/AoStore/ao-store'
+import { WorldMap } from '../../Dialogs/Gameplay/WorldMap/world-map'
 
 const showHKIcon = status => {
   if (status) {
@@ -53,9 +54,9 @@ export default function GameplayScreen() {
   }
   return (
     <div className='gameplay-screen'>
+      <DragDropProvider>
       <TopBar styles={'top-bar ' + (transitionActive ? 'gp-top-exit-animation' : 'gp-top-intro-animation')}/>
       <div className='gameplay-area'>
-      <DragDropProvider>
       <span className={'menu-separator ' + (transitionActive ? 'gp-left-exit-animation' : 'gp-left-intro-animation')}><span className='frame-corner bot-left'></span></span>
         <div className='gameplay-and-chat'>
           <div className={'chat-section ' + (transitionActive ? 'gp-top-exit-animation' : 'gp-top-intro-animation')}>
@@ -82,8 +83,9 @@ export default function GameplayScreen() {
           <span className={'gameplay-bottom-frame ' + (transitionActive ? 'gp-bottom-exit-animation' : 'gp-bottom-intro-animation')}></span>
         </div>
         <span className={'menu-separator ' + (transitionActive ? 'gp-right-exit-animation' : 'gp-right-intro-animation')}><span className='frame-corner bot-right'></span></span>
-        <SideMenu styles={'right-panel ' + (transitionActive ? 'gp-right-exit-animation' : 'gp-right-intro-animation')}/>
-        <ErrorBoundary compName="gameplay popups">
+        <SideMenu styles={'right-panel ' + (transitionActive ? 'gp-right-exit-animation' : 'gp-right-intro-animation')}/>        
+      </div>
+      <ErrorBoundary compName="gameplay popups">
         {
           popupsState ?
           <div className='popups'>
@@ -93,7 +95,8 @@ export default function GameplayScreen() {
                 'iframe':<IFrameDialog options={popupsState}/>,
                 'npc-trade':<NpcTrade settings={popupsState}/>,
                 'settings':<SettingsDialog settings={popupsState}/>,
-                'ao-shop':<AoStore settings={popupsState}/>
+                'ao-shop':<AoStore settings={popupsState}/>,
+                'world-map': <WorldMap settings={popupsState}/>
               }
               [popupsState.popUp]
             }
@@ -104,9 +107,8 @@ export default function GameplayScreen() {
           remoteTrackActive ? <RemoteCursor /> : null
         }
         </ErrorBoundary>
-        <DragLayer/>
-        </DragDropProvider>
-      </div>
+      <DragLayer/>
+      </DragDropProvider>
     </div>
   )
 }

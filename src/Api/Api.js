@@ -324,7 +324,7 @@ if (process.env.NODE_ENV === 'development') {
       return { name: "test spell", description: "some spell data", cooldown:40000, requiredMana:1500, requiredSkill:100, requiredStamina: 950}
     },
     GetItemInfo : objIndex => {
-      return { objType: 24, spellIndex: 1}
+      return { objType: 24, spellIndex: 1, grhIndex: 10, text: "some item details with a long explanations"}
     },
     LogError: error => {
       console.log(error)
@@ -344,6 +344,18 @@ if (process.env.NODE_ENV === 'development') {
     },
     GetNpcName: npcNumber => {
       return "Gulfas morgolock"
+    },
+    SellItem: (slot, amount) => {
+
+    },
+    BuyItem: (slot, amount) => {
+
+    },
+    CloseMerchant: () => {
+
+    },
+    MoveMerchantItem: (from, to) => {
+
     }
   } 
 }

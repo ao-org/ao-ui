@@ -34,12 +34,13 @@
 
     .search-bar {
       flex-grow: 1;
-      padding: 5px 20px;
+      padding: 10px 20px;
       .search-text {
         margin: 0;
         font-family: 'Alegra-AO'; 
       }
       .search-input {
+        margin-top: 5px;
         max-width: 200px;
       }
     }
@@ -66,18 +67,102 @@
     min-height: 300px;
     display: flex;
     flex-direction: row;
-
+    margin-top: 5px;
+    
     .item-list-frame {
       min-width: 300px;
+      max-width: 300px;
       min-height: 300px;
+      max-height: 300px;
+      background-size: 100% 100%;
+      background-image: url('../../../../assets/Backgrounds/leather_black.png');
+      display: flex;
+      flex-direction: column;
+
+      .header-style {
+        background-image: url(../../../../assets/Buttons/button_gray_default.png);
+        text-align: center;
+        background-size: 100% 100%;
+      }
+      .price {
+        margin: auto;
+        width: 80px;
+        min-width: 80px;
+        max-width: 80px;
+        padding: 4px;
+      }
+      .item-info {
+        margin: 0;
+        flex-grow: 1;
+        padding: 4px;
+        word-wrap: break-word;
+      }
+      .element-line {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        font-family: 'Alegra-AO';
+        font-size: 0.6rem;
+        font-weight: 600;
+        margin: 0px;
+        min-height: 20px;
+      }
+      .item-list {
+        overflow-y: scroll;
+        flex-grow: 1;
+
+        .el-price {
+          text-align: center;
+        }
+      }
+
+      .selected-shop-item {
+        color: gold;
+      }
+
+      
     }
 
     .item-preview-frame {
-      min-width: 200px;
+      width: 170px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      .ribbon {
+        top: -10px;
+      }
+
+      .item-image {
+        margin-top: 40px;
+        position: relative;
+        .selected-item-icon {
+          margin: auto;
+        }
+      }
+      .item-description-area {
+        flex-grow: 1;
+        margin-top: 20px;
+        .item-details {
+          margin: auto 20px;
+        }
+      }
+
+      .warning-area {
+        color: red;
+        margin: 20px 5px;
+        text-align: center;
+      }
     }
   }
 
   .button-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 5px;
 
+    .shop-button {
+      padding: 5px 20px;
+    }
   }
 }

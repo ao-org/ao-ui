@@ -16,7 +16,8 @@ export const GameStateSlice = createSlice({
     trackUserActive: 0,
     trackUserMousePos: {x:0, y:0},
     trackUserLastClick: 0,
-    trackRemoteInvTab: -1
+    trackRemoteInvTab: -1,
+    merchantSlots: null
   },
   reducers: {
     setFps: (state, action) => {
@@ -58,12 +59,23 @@ export const GameStateSlice = createSlice({
     },
     openNpcTradeDialog: (state) => {
       state.activeDialog = {
-        popUp: 'npc-trade',
-        npcItemsList: Array(42).fill({name:'', count:1, cantUse: 0, equipped: false, grh:0,
+        popUp: 'npc-trade'
+      }
+      if (!state.merchantSlots) {
+        state.merchantSlots = Array(42).fill({name:'', count:1, cantUse: 0, equipped: false, grh:0,
         maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: 0,
         value: 0, cooldown:0, cdType:0, cdMask:0})
         .map((element, index) => ({...element, count: 0, index:index}))
       }
+    },
+    handleMerchantItemChange: (state, action) => {
+      if (!state.merchantSlots) {
+        state.merchantSlots = Array(42).fill({name:'', count:1, cantUse: 0, equipped: false, grh:0,
+        maxDef:0, minDef:0, minHit:0, maxHit:0, objIndex: 0, type: 0,
+        value: 0, cooldown:0, cdType:0, cdMask:0})
+        .map((element, index) => ({...element, count: 0, index:index}))
+      }
+      state.merchantSlots[action.payload.index] = action.payload
     },
     openAoShop: (state) => {
       state.activeDialog = {
@@ -85,9 +97,9 @@ export const GameStateSlice = createSlice({
 })
 
 export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime,
-               updateIsGameMaster, updateSpellListScroll,
+               updateIsGameMaster, updateSpellListScroll, openNpcTradeDialog,
                updateFirstSpellToDisplay, updateTrackState, updateTrackMousePos,
-               updateTrackLastMouseClick, updateRemoteTab } = GameStateSlice.actions
+               updateTrackLastMouseClick, updateRemoteTab, handleMerchantItemChange } = GameStateSlice.actions
 
 export const selectFps = (state) =>  state.gameState.fps
 export const selectOnlines = (state) => state.gameState.online
@@ -100,5 +112,6 @@ export const selectTrackUserActive = (state) => state.gameState.trackUserActive
 export const selectRemoteMousePos = (state) => state.gameState.trackUserMousePos
 export const selectTrackUserLastClick = (state) => state.gameState.trackUserLastClick
 export const selectTrackUserActiveInvTab = (state) => state.gameState.trackRemoteInvTab
+export const selectMerchantSlots = (state) => state.gameState.merchantSlots
 
 export default GameStateSlice.reducer

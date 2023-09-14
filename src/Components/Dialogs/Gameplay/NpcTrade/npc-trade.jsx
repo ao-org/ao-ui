@@ -8,7 +8,7 @@ import { useState } from 'react';
 import GameBarButton from '../../../Common/ao-button/GameBarButton/game-bar-button';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectExtraSlotState, selectInventorySlots } from '../../../../redux/GameplaySlices/InventorySlice';
-import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
+import { selectMerchantSlots, setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 
 const InventoryType = {
   Unselected: 0,
@@ -21,7 +21,7 @@ const onDropItem = (item, container) => {
 }
 
 const onDropMerchantItem = (item, container) => {
-  console.log('drag merchant item')
+  window.parent.BabelUI.MoveMerchantItem(item.index, container.id)
 }
 export const NpcTrade = ({settings}) => {
   const { t } = useTranslation();
@@ -32,7 +32,9 @@ export const NpcTrade = ({settings}) => {
                                        selectedItemValue: 0})
   const invLevel = useSelector(selectExtraSlotState)
   const userList = useSelector(selectInventorySlots)
-  const npsList = settings.npcItemsList
+  const npsList =  useSelector(selectMerchantSlots)
+  console.log('render npc trade')
+  console.log(npsList)
   let extraSlots = 0
   invLevel.forEach( element => {
     if (element) {
@@ -80,16 +82,19 @@ export const NpcTrade = ({settings}) => {
   const dispatch = useDispatch()
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
+    window.parent.BabelUI.CloseMerchant()
   }
   const onSell = e => {
     if (state.selectedInventory !== InventoryType.User || state.amount < 1) {
       return
     }
+    window.parent.BabelUI.SellItem(state.selectedIndex, state.amount)
   }
   const onBuy = e => {
     if (state.selectedInventory !== InventoryType.Npc || state.amount < 1) {
       return
     }
+    window.parent.BabelUI.BuyItem(state.selectedIndex, state.amount)
   }
   const price = Math.round(state.selectedItemValue * state.amount)
   return (
