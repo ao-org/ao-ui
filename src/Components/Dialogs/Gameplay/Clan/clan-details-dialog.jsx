@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './clan-details-dialog.scss'
-import AoDialog from '../../Common/ao-dialog/ao-dialog'
-import AoButton from '../../Common/ao-button/ao-button'
+import AoDialog from '../../../Common/ao-dialog/ao-dialog'
+import AoButton from '../../../Common/ao-button/ao-button'
 import { useTranslation } from 'react-i18next'
 
 const mockClanDetail = {
