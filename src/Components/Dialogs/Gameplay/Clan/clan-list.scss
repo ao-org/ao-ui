@@ -1,0 +1,86 @@
+.clan-list-dialog {
+  display: flex;
+  flex-direction: column;
+  min-width: 580px;
+  max-width: 680px;
+
+  h2 {
+    text-align: center;
+  }
+
+
+  .list-box {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 2%;
+      
+    .filters {
+      display: flex;
+      flex-direction: row;
+      height: 33px;
+      background-color: blue;
+      
+
+      .search {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        position: relative;
+        background-color: black;
+        border-radius: 0.375rem;
+        border: 2px solid #494943;
+
+
+        input {
+          border: none;
+          outline: none;  
+          width: 10rem;
+          font-size: 0.9rem;
+          padding: 0.1rem 0.2rem;
+          background-color: black;
+          color: white;
+          transition: 500ms width ease-in-out;
+          transition-delay: 100ms;
+          z-index: 1;
+        }
+
+        input:focus {
+          width: 15rem;
+        }
+
+        img {
+          position: absolute;
+          right: 0;
+          cursor: pointer;
+          height: 20px;
+          width: 20px;
+          z-index: 2;
+          padding: 0.1rem;
+        }
+      }
+      
+    
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      height: 250px;
+      overflow-y: scroll;
+
+      span {
+        padding-top: 0.3rem;
+      }
+
+      span:hover {
+        background-color: white;
+      }
+    }
+
+  }
+
+  
+
+}
