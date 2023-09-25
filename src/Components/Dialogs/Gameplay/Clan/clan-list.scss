@@ -8,19 +8,31 @@
     text-align: center;
   }
 
+  .frame-sep{
+    height: 18px;
+    width: 100%;
+
+    .small {
+      height: 10px;
+    }
+  }
+
 
   .list-box {
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin: 2%;
+    padding: 2%;
       
     .filters {
       display: flex;
       flex-direction: row;
       height: 33px;
-      background-color: blue;
-      
+      gap: 1rem;
+
+      .btn {
+        border: 2px solid #494943;
+      }
 
       .search {
         display: flex;
@@ -29,38 +41,49 @@
         justify-content: start;
         position: relative;
         background-color: black;
-        border-radius: 0.375rem;
-        border: 2px solid #494943;
+        
 
 
         input {
           border: none;
           outline: none;  
-          width: 10rem;
+          width: 15rem;
           font-size: 0.9rem;
           padding: 0.1rem 0.2rem;
           background-color: black;
           color: white;
-          transition: 500ms width ease-in-out;
-          transition-delay: 100ms;
           z-index: 1;
-        }
-
-        input:focus {
-          width: 15rem;
+          font-family: Alegra-AO;
         }
 
         img {
           position: absolute;
           right: 0;
           cursor: pointer;
-          height: 20px;
-          width: 20px;
+          height: 15px;
+          width: 15px;
           z-index: 2;
           padding: 0.1rem;
         }
       }
-      
+
+      .select {
+        display: flex;
+        align-items: center;
+
+        label {
+          font-size: 0.9rem;
+          padding-right: 0.2rem;
+          font-family: Alegra-AO;
+        }
+      }
+
+      .alineacion {
+        background-color: black;
+        color: white;
+        height: 100%;
+        outline: none
+      }
     
     }
 
@@ -68,19 +91,58 @@
       display: flex;
       flex-direction: column;
       height: 250px;
+      margin-top: 1rem;
       overflow-y: scroll;
+      background-image: url('../../../../assets/Backgrounds/main_pj_info.png');
+      background-size: cover;
 
       span {
+        font-size: 0.9rem;
+        padding-left: 0.9rem; 
         padding-top: 0.3rem;
+        font-family: Alegra-AO;
       }
 
       span:hover {
-        background-color: white;
+        background-color: rgba(0, 0, 0, 0.45);
       }
     }
 
+    .red {
+      animation: mypulseRed 5s infinite
+    }
+  
+    .blue{
+      animation: mypulseBlue 5s infinite
+    }
+
+    @keyframes mypulseRed {
+      50% {
+        box-shadow: 0 0 2rem 0.1em rgb(201 55 55 / 25%);
+      }
+    }
+
+    @keyframes mypulseBlue {
+      50% {
+        box-shadow: 0 0 2rem 0.1em rgba(7, 54, 156, 0.25);
+      }
+    }
+    
+    
   }
 
+  
+  .last {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0.5rem;
+
+    .fundar {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+  }
   
 
 }
