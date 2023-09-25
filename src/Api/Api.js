@@ -355,7 +355,15 @@ if (process.env.NODE_ENV === 'development') {
 
     },
     MoveMerchantItem: (from, to) => {
-
+    },
+    GetWorldGrid: () => {
+      return [{height:22, width: 19}, {height:22, width: 19}, {height:22, width: 19}, {height:22, width: 19}]
+    },
+    BuyPatronItem: (objIndex) => {
+    },
+    UpdateBoolSetting: (settingType, newValue) => {
+    },
+    UpdateIntSetting: (settingType, newValue) => {
     }
   } 
 }

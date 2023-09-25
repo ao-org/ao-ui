@@ -22,14 +22,24 @@ export const AoStore = ({settings}) => {
     const { value, name } = event.target;
     setDialogState({ ...dialogState, [name]: value});
   }
+  const searchTerm = search.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase()
   const filteredList = settings.itemList.filter( e => 
-    e.name.includes(search)
+    e.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase().includes(searchTerm)
   )
   const onItemSelect = el => {
     setDialogState({ ...dialogState, selectedIndex: el.objIndex});
   }
+  const buyItem = evt => {
+    if (selectedIndex > 0) {
+      window.parent.BabelUI.BuyPatronItem(selectedIndex)
+      dispatch(setGameActiveDialog(null))
+    }
+  }
+  
+  const selectedItem = settings.itemList.find( el => el.objIndex === selectedIndex)
   const selectedItemDetails = selectedIndex > 0 ? window.parent.BabelUI.GetItemInfo(selectedIndex) : null
   const grhInfo = selectedItemDetails ? window.parent.BabelUI.GetGrhDrawInfo(selectedItemDetails.grhIndex) : null
+  const canBuy = selectedItem ? selectedItem.price <= settings.availableCredits : false;
   return (
     <AoDialog styles='ao-shop' contentStyles='content'>
       <div className='header-line'>
@@ -48,7 +58,7 @@ export const AoStore = ({settings}) => {
         </div>
       </div>
       <div className='item-selection-area'>
-        <Frame contentStyles='item-list-frame'>
+        <Frame styles='left-frame' contentStyles='item-list-frame'>
           <div className='element-line'>
             <p className='price header-style'>{t('price').toLocaleUpperCase()}</p>
             <p className='item-info header-style'>{t('name').toLocaleUpperCase()}</p>
@@ -58,14 +68,14 @@ export const AoStore = ({settings}) => {
               filteredList.map( el => (
                 <div className={'element-line ' + (el.objIndex === selectedIndex ? 'selected-shop-item' : '')} onClick={ evt => onItemSelect(el)}>
                   <p className='price el-price'>{el.price}</p>
-                  <p className='item-info'>{el.name}</p>
+                  <p className='item-info item-info-in-list'>{el.name}</p>
                 </div>
               ))
            }
           </div>
         </Frame>
-        <Frame contentStyles='item-preview-frame'>
-          <RibbonTittle text={t('description').toLocaleUpperCase()} styles='ribbon'/>
+        <Frame styles='right-frame' contentStyles='item-preview-frame'>
+          <RibbonTittle text={t('details').toLocaleUpperCase()} styles='ribbon'/>
           <div className='item-image'>
             {
               selectedItemDetails ? 
@@ -85,15 +95,14 @@ export const AoStore = ({settings}) => {
               selectedItemDetails ? 
               <p className='item-details'>{selectedItemDetails.text}</p>
               : null
-            }
-            
+            }            
           </div>
           <div className='warning-area'>{t('reload-character-warning')}</div>
         </Frame>
       </div>
       <div className='button-line'>
         <AoButton styles='shop-button' onClick={onClose}>{t('cancel').toLocaleUpperCase()}</AoButton>
-        <AoButton styles='shop-button'>{t('buy').toLocaleUpperCase()}</AoButton>
+        <AoButton styles='shop-button' disabled={!canBuy} onClick={buyItem}>{t('buy').toLocaleUpperCase()}</AoButton>
       </div>
     </AoDialog>
 )}

@@ -67,6 +67,7 @@ export const GameStateSlice = createSlice({
         value: 0, cooldown:0, cdType:0, cdMask:0})
         .map((element, index) => ({...element, count: 0, index:index}))
       }
+      window.parent.BabelUI.UpdateOpenDialog(true)
     },
     handleMerchantItemChange: (state, action) => {
       if (!state.merchantSlots) {
@@ -77,11 +78,13 @@ export const GameStateSlice = createSlice({
       }
       state.merchantSlots[action.payload.index] = action.payload
     },
-    openAoShop: (state) => {
+    openAoShop: (state, action) => {
       state.activeDialog = {
         popUp: 'ao-shop',
-        itemList: []
+        itemList: action.payload.itemList,
+        availableCredits: action.payload.availableCredits
       }
+      window.parent.BabelUI.UpdateOpenDialog(true)
     },
     extraReducers: (builder) => {
       builder
@@ -96,7 +99,7 @@ export const GameStateSlice = createSlice({
   },
 })
 
-export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime,
+export const { setFps, setGameActiveDialog, updateOnlines, updateGameTime, openAoShop,
                updateIsGameMaster, updateSpellListScroll, openNpcTradeDialog,
                updateFirstSpellToDisplay, updateTrackState, updateTrackMousePos,
                updateTrackLastMouseClick, updateRemoteTab, handleMerchantItemChange } = GameStateSlice.actions

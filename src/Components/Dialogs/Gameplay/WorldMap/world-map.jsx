@@ -7,33 +7,109 @@ import './world-map.scss';
 import Frame from '../../../Common/Frame/frame';
 import { useState } from 'react';
 import { GetRootDirectory } from '../../../../Tools/Utils';
+import AoCheckbox from '../../../Common/ao-checkbox/ao-checkbox';
+import AoInput from '../../../Common/ao-input/ao-input';
+import GameBarButton from '../../../Common/ao-button/GameBarButton/game-bar-button';
+import { ErrorBoundary } from '../../../ErrorBoundary/error-boundary';
+import { FindNpc } from './FindNpc/find-npc';
 
 const Worlds = [
   { name: 'Argentum', index: 1},
-  { name: 'Dungeons', index: 2},
-  { name: 'Jogormut', index: 3}
+  { name: 'Jogormut', index: 3},
+  { name: 'Dungeons', index: 2}
 ]
 const GetWorldImage = image => {
   return `${GetRootDirectory()}/interface/${image}.bmp`
 }
 
-const GetMapList = () => {
+let WorldGrid = []
+const GetWorldGrid = worldIndex => {
+  if (WorldGrid.length === 0) {
+    WorldGrid = window.parent.BabelUI.GetWorldGrid()
+  }
+  return WorldGrid[worldIndex]
+}
+
+const GetMapList = (world) => {
   return [{
     name: 'Desierto',
-    npcList: [{name: 'Gallo', count: 100}]
+    npcList: [{name: 'Pirata salvaje', count: 999, index: 1},
+     {name: 'Pirata salvaje', count: 999, index: 2},
+     {name: 'Pirata con nombre muy largo salvaje', count: 999, index: 3},
+     {name: 'Pirata salvaje', count: 999, index: 4},
+     {name: 'Pirata con nombre muy largo salvaje', count: 999, index: 5}, 
+     {name: 'Pirata con nombre muy largo salvaje', count: 999, index: 6}]
   }]
 }
+
+const getBackgroundStyle = (showSafe, mapInfo, isSelected) => {
+  if (!showSafe) return isSelected ? 'selected-grid-element' : ''
+  if (mapInfo.isSafe) {
+    return 'safe-area ' +  (isSelected ? 'selected-grid-element' : '')
+  }
+  return 'unsafe-area ' +  (isSelected ? 'selected-grid-element' : '')
+}
+
+const CellSize = 25;
 export const WorldMap = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch()
-  const [ dialogState, setDialogState] = useState({activeWorld: Worlds[0].index, selectedMap: 0})
-  const { activeWorld, selectedMap } = dialogState
+  const [ dialogState, setDialogState] = useState({
+     activeWorld: Worlds[0].index,
+     selectedWorld: 0, 
+     selectedNpc:null,
+     showMapNumbers:false,
+     displaySafeUnsafe:false,
+     selectedMap: 0,
+     findMap: null,
+     popupsState: null
+    })
+  const { activeWorld, 
+        selectedWorld, 
+        selectedNpc, 
+        showMapNumbers,
+        displaySafeUnsafe,
+        selectedMap,
+        findMap,
+        popupsState } = dialogState
   const onClose = e => {
     dispatch(setGameActiveDialog(null))
   }
-  const selectedMapDetails = GetMapList()[selectedMap]
+  const selectedMapDetails = GetMapList()[selectedWorld]
+  const selectedGrid = GetWorldGrid(selectedWorld)
+  const gridCount = (selectedGrid.height) * (selectedGrid.width)
+  const grid = Array(gridCount).fill({ mapNumber: 0, name: 'Desierto'}).map( (el, index) => ({...el, mapNumber: index, isSafe: index % 2 === 0}));
+  const gridStyle = {
+    gridTemplateColumns: `repeat(${selectedGrid.width}, 1fr)`,
+    width: `${selectedGrid.width * CellSize}px`,
+    height: `${selectedGrid.height *CellSize}px`
+  }
   const onChangeWorld = world => {
     setDialogState({...dialogState, activeWorld: world.index})
+  }
+  const selectNpc = npc => {
+    setDialogState({...dialogState, selectedNpc: npc.index})
+  }
+  const mapImageStyle = {
+    width: `${selectedGrid.width * CellSize}px`,
+    height: `${selectedGrid.height *CellSize}px`
+  }
+  const cellSize = {
+    width: `${CellSize}px`,
+    height: `${CellSize}px`
+  }
+  const handleChange = (evt, value) => {
+    const { name } = evt.target;
+    setDialogState({ ...dialogState, [name]: value});
+  }
+  const onSelectMap = mapInfo => {
+    setDialogState({ ...dialogState, selectedMap: mapInfo.mapNumber});
+  }
+  const openNpcSearch = evt => {
+    setDialogState({ ...dialogState, popupsState:'find-npc'});
+  }
+  const onCloseNpcFind = evt => {
+    setDialogState({ ...dialogState, popupsState:null});
   }
   return (
     <AoDialog styles='world-map' contentStyles='content'>
@@ -55,7 +131,20 @@ export const WorldMap = () => {
             }
           </div>
           <Frame styles='map-grid-frame' contentStyles='map-grid'>
-            <img src={GetWorldImage(`es_mapa${activeWorld}`)}></img>
+            <img src={GetWorldImage(`es_mapa${activeWorld}`)} style={mapImageStyle}></img>
+            <div className='grid-layer' style={gridStyle}>
+              {
+                grid.map( (el, index) => (
+                  <span className={'grid-element ' + getBackgroundStyle(displaySafeUnsafe, el, el.mapNumber === selectedMap)} 
+                    onClick={() => onSelectMap(el)}
+                    key={el.mapNumber} style={cellSize}>
+                    {
+                      showMapNumbers && <p className='grid-number'>{el.mapNumber}</p>
+                    }
+                  </span>
+                ))
+              }
+            </div>
           </Frame>
         </div>
         <div className='side-bar-area'>
@@ -65,13 +154,14 @@ export const WorldMap = () => {
               selectedMapDetails.npcList.length > 0 ?
               <>
                 <div className='npc-list-title'>
-                  <span className='npc-list-name'>{t('Npcs')}</span>
-                  <span className='npc-list-count'>{t('count')}</span>
+                  <span className='npc-list-name npc-header-line'>{t('Npcs')}</span>
+                  <span className='npc-list-count npc-header-line'>{t('Amount')}</span>
                 </div>
                 {
                 selectedMapDetails.npcList.map( npcEntry => (
-                  <div className='npc-list-title'>
-                    <span className='npc-list-name'>{npcEntry.name}</span>
+                  <div className={'npc-list-title ' + ( selectedNpc === npcEntry.index ? 'selected-npc' : '')} 
+                       onClick={ () => selectNpc(npcEntry)}>
+                    <span key={npcEntry.index} className='npc-list-name'>{npcEntry.name}</span>
                     <span className='npc-list-count'>{npcEntry.count}</span>
                   </div>
                   ))
@@ -81,8 +171,47 @@ export const WorldMap = () => {
               <p className='no-npc-found'>{t('no-npc-found')}</p>
             }
           </Frame>
+          <p className='npc-details-tittle'>{t('Details')}</p>
+          <Frame contentStyles='npc-info'>
+
+          </Frame>
+          <div className='search-map'>
+            <p className='find-map-title'>{t('Find Map')}</p>
+            <AoInput name="findMap" type="number"   styles='search-input'
+              min="1" max="10000" value={findMap} IsValid={true} handleChange={handleChange} />
+            <GameBarButton>
+              <img src={require('../../../../assets/Icons/gameplay/ico_gear.png')}></img>
+            </GameBarButton>
+          </div>
+          <AoButton styles='search-npc-button' onClick={openNpcSearch}>{t('search-npc')}</AoButton>
+          <p className='npc-details-tittle'>{t('Markers')}</p>
+          <AoCheckbox label={t('map-number')} 
+            name="showMapNumbers" 
+            styles='markers-ops' 
+            labelStyle='marker-label' 
+            handleChange={ (evt) => handleChange(evt, !showMapNumbers)} 
+            state={showMapNumbers} />
+          <AoCheckbox label={t('display-safe-unsafe')} 
+            name="displaySafeUnsafe" 
+            styles='markers-ops' 
+            labelStyle='marker-label' 
+            handleChange={(evt) => handleChange(evt, !displaySafeUnsafe)} 
+            state={displaySafeUnsafe} />
         </div>
       </div>
+      <ErrorBoundary compName="map popups">
+        {
+          popupsState ?
+          <div className='popups'>
+            {{
+                'find-npc':<FindNpc styles='centered' onClose={onCloseNpcFind}/>
+              }
+              [popupsState]
+            }
+          </div> :
+          null
+        }
+        </ErrorBoundary>
     </AoDialog>
   )
 }

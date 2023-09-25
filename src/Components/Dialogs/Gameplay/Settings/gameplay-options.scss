@@ -27,6 +27,12 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      .split-row {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
     }
   }
 

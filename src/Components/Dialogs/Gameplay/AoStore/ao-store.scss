@@ -37,7 +37,8 @@
       padding: 10px 20px;
       .search-text {
         margin: 0;
-        font-family: 'Alegra-AO'; 
+        font-family: 'Alegra-AO';
+        font-size: 1rem;
       }
       .search-input {
         margin-top: 5px;
@@ -69,6 +70,14 @@
     flex-direction: row;
     margin-top: 5px;
     
+    .left-frame {
+      margin-left: 10px;
+    }
+
+    .right-frame {
+      margin-right: 10px;
+    }
+
     .item-list-frame {
       min-width: 300px;
       max-width: 300px;
@@ -96,6 +105,9 @@
         flex-grow: 1;
         padding: 4px;
         word-wrap: break-word;
+      }
+      .item-info-in-list {
+        margin-right: 10px;
       }
       .element-line {
         width: 100%;
@@ -149,7 +161,7 @@
 
       .warning-area {
         color: red;
-        margin: 20px 5px;
+        margin: 5px;
         text-align: center;
       }
     }

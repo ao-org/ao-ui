@@ -9,6 +9,7 @@ import GameBarButton from '../../../Common/ao-button/GameBarButton/game-bar-butt
 import { useDispatch, useSelector } from 'react-redux';
 import { selectExtraSlotState, selectInventorySlots } from '../../../../redux/GameplaySlices/InventorySlice';
 import { selectMerchantSlots, setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
+import { selectGold } from '../../../../redux/GameplaySlices/PlayerStatsSlice';
 
 const InventoryType = {
   Unselected: 0,
@@ -33,8 +34,7 @@ export const NpcTrade = ({settings}) => {
   const invLevel = useSelector(selectExtraSlotState)
   const userList = useSelector(selectInventorySlots)
   const npsList =  useSelector(selectMerchantSlots)
-  console.log('render npc trade')
-  console.log(npsList)
+  const userGold = useSelector(selectGold)
   let extraSlots = 0
   invLevel.forEach( element => {
     if (element) {
@@ -70,7 +70,7 @@ export const NpcTrade = ({settings}) => {
   const selectMax = () => {
     if (state.selectedInventory === InventoryType.Npc) {
       setState({ ...state, 
-        amount: npsList[state.selectedIndex].count
+        amount: Math.min(npsList[state.selectedIndex].count, userGold / state.selectedItemValue)
       });
     }
     else if (state.selectedInventory === InventoryType.User) {
@@ -96,7 +96,8 @@ export const NpcTrade = ({settings}) => {
     }
     window.parent.BabelUI.BuyItem(state.selectedIndex, state.amount)
   }
-  const price = Math.round(state.selectedItemValue * state.amount)
+  const itemCount = state.selectedInventory === InventoryType.Npc ? state.amount : Math.min(state.amount, userList[state.selectedIndex].count)
+  const price = Math.round(state.selectedItemValue *  itemCount)
   return (
     <AoDialog styles='npc-trade' contentStyles='content'>
       <div className='header-line'>
@@ -139,6 +140,7 @@ export const NpcTrade = ({settings}) => {
             min="1" max="10000"
             IsValid={true}
             value={state.amount}
+            inputStyles='amount-style'
             onKeyPress={(event) => {
               if (!/[0-9]/.test(event.key)) {
                 event.preventDefault();

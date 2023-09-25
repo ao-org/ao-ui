@@ -1,14 +1,44 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
-import { ItemCounFormat } from '../../constants'
 
 const defaultSettings = {
-  itemCountFormat: ItemCounFormat.DisplayReduced,
+  gameSettings: {
+  gameplay : {
+    copyDialogsEnabled: false,
+    writeAndMove: false,
+    blockSpellListScroll: false,
+    throwSpellLockBehavior: 0,
+    mouseSens: 0,
+    invertMouse: false,
+    userGraphicCursor: false,
+    language: 1,
+    renderNpcText: false,
+    tutorialEnabled: false
+    },
+    video: {
+      shopFps: false,
+      moveGameWindow: false,
+      characterBreathing: false,
+      fullScreen: false,
+      displayFloorItemInfo: false,
+      displayFullNumbersInventory: false,
+      enableBabelUI: false
+    },
+    audio: {
+      enableMusic: false,
+      enableFx: false,
+      enableAmbient: false,
+      sailFx: false,
+      invertChannels: false,
+      musicVolume: 0,
+      fxVolume: 0,
+      ambientVolume: 0
+    }
+  },
   spellListScrollLock: 0,
   combatChat: 0,
   spellMode: 0,
   scrollDrag: 0,
-  //featureToggles: ['hotokey-enabled'],
-  featureToggles: [],
+  featureToggles: ['hotokey-enabled'],
   hideHotkeys: false
 }
 export const GameSettingsSlice = createSlice({
@@ -16,10 +46,7 @@ export const GameSettingsSlice = createSlice({
   initialState: defaultSettings,
   reducers: {
     updateSettings: (state, action) => {
-      state.itemCountFormat = action.payload.inventoryFullNumbers
-      state.combatChat = action.payload.combatChat
-      state.spellMode = action.payload.spellMode
-      state.scrollDrag = action.payload.scrollDrag
+      state.gameSettings = action.payload
     },
     clearFeatureToggles: (state) => {
       state.featureToggles = []
@@ -35,9 +62,12 @@ export const GameSettingsSlice = createSlice({
 
 export const { updateSettings, clearFeatureToggles, addFeatureToggle, setHideHotkeys } = GameSettingsSlice.actions
 
-export const selectItemCountFormat = (state) => state.gameSettings.itemCountFormat
-export const selectSpellListScrollLock = (state) => state.gameSettings.spellListScrollLock
+export const selectItemCountFormat = (state) => state.gameSettings.gameSettings.video.displayFullNumbersInventory
+export const selectSpellListScrollLock = (state) => state.gameSettings.gameSettings.gameplay.blockSpellListScroll
 export const selectHideHotkeys = (state) => state.gameSettings.hideHotkeys
+export const selectGameplaySettings = (state) => state.gameSettings.gameSettings.gameplay
+export const selectVideoSettings = (state) => state.gameSettings.gameSettings.video
+export const selectAudioSettings = (state) => state.gameSettings.gameSettings.audio
 
 export const isToggleEnabled = createSelector(
   [

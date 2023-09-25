@@ -132,7 +132,10 @@ const resources = {
       'admission-application': 'Admission application',
       'request-admission': 'Request admission',
       'reload-character-warning': 'For safety, reload your character after the transaction is complete.',
-      'deny': 'deny'
+      'decline': 'decline',
+      'search': 'Search',
+      'credits': 'Credits',
+      'details': 'Details'
     }
   },
   es: {
@@ -297,7 +300,12 @@ const resources = {
       'request-admission': 'Solicitar ingreso',
       'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.',
       'deny': 'Rechazar',
-      'credits': 'Créditos'
+      'credits': 'Créditos',
+      'Amount': 'Cantidad',
+      'decline': 'Rechazar',
+      'search': 'Buscar',
+      'details': 'Detalles',
+      'price': 'Precio'
     }
   }
 };

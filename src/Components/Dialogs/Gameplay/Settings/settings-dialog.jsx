@@ -6,6 +6,8 @@ import AoButton from '../../../Common/ao-button/ao-button';
 import { GameplayTab } from './gameplay-option-tab';
 import { AudioSettingsTab } from './audio-settings-tab';
 import { VideoSettingsTab } from './video-settings';
+import { useDispatch } from 'react-redux';
+import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 
 export const SettingsDialog = ({settings}) => {
   const { t } = useTranslation();
@@ -13,12 +15,19 @@ export const SettingsDialog = ({settings}) => {
   const onChange = panel => {
     setActivePannel(panel)
   }
+  const dispatch = useDispatch()
+  const onClose = () => {
+    dispatch(setGameActiveDialog(null))
+  }
   return (
   <AoDialog styles='settings-dialog' contentStyles='content'>
     <div className='header-line'>
       <h1 className='game-dialog-header'>{t('settings').toUpperCase()}</h1>
     </div>
     <span className='header-underline'></span>
+    <AoButton styles='close-button' onClick={onClose}>
+      <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
+    </AoButton>
     <div className='sub-menu-selection'>
       <AoButton styles={'stats-opt-button ' + (activePannel === 'gameplay' ? 'selected' : 'unselected')} onClick={() => onChange('gameplay')}>{t("gameplay").toUpperCase()}</AoButton>
       <AoButton styles={'stats-opt-button ' + (activePannel === 'video' ? 'selected' : 'unselected')} onClick={() => onChange('video')}>{t("video").toUpperCase()}</AoButton>

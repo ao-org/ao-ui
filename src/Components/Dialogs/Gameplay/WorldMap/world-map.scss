@@ -1,6 +1,6 @@
 .world-map {
   position: relative;
-  margin: -10px auto;
+  margin: auto;
 
   .close-button{
     position: absolute;
@@ -55,6 +55,33 @@
       }
       .map-grid-frame {
         margin: 0px;
+        position: relative;
+        
+        .grid-layer {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          display: grid;
+          grid-auto-rows: auto;
+          top: 0;
+          left: 0;
+        }
+        .grid-element {
+          display: flex;
+        }
+        .selected-grid-element {
+          border: 1px solid white;
+          box-sizing: border-box;
+        }
+        .grid-number {
+          margin: auto;
+        }
+        .safe-area {
+          background-color: rgba(127, 255, 212, 0.447);
+        }
+        .unsafe-area {
+          background-color: rgba(220, 20, 60, 0.301);
+        }
       }
 
       .map-grid {
@@ -65,6 +92,13 @@
       display: flex;
       flex-direction: column;
       width: 200px;
+      margin: 10px;
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
 
       .map-name {
         text-align: center;
@@ -75,16 +109,29 @@
       }
       .npc-info {
         width: 100%;
+        height: 150px;
+        overflow-y: scroll;
       }
       .npc-list-title {
         display: flex;
         flex-direction: row;
+        margin: 5px;
       }
       .npc-list-name {
         flex-grow: 1;
+        font-family: 'Alegra-AO';
       }
       .npc-list-count {
-
+        font-family: 'Alegra-AO';
+        margin: auto;
+      }
+      .npc-header-line {
+        font-size: 0.7rem;
+        color: rgb(159, 156, 156);
+        margin-bottom: 10px;
+      }
+      .selected-npc {
+        color: gold;
       }
       .no-npc-found{
         width: 100%;
@@ -92,6 +139,32 @@
         font-family: 'Alegra-AO';
         font-weight: 600;
         text-align: center;
+      }
+
+      .npc-details-tittle {
+        font-size: 1rem;
+        margin: 10px 0px 0px 10px;
+      }
+
+      .search-map {
+        display: flex;
+        flex-direction: row;
+        margin-top: 5px;
+
+        .find-map-title {
+          margin: auto;
+        }
+        .search-input {
+          width: 80px;
+          margin: 0px 10px;
+        }
+      }
+      .search-npc-button {
+        margin: 5px;
+      }
+
+      .markers-ops {
+        margin: 5px;
       }
     }
   }
