@@ -2,6 +2,13 @@
   position: relative;
   margin: auto;
   opacity: 0.9px;
+
+  .close-button{
+    position: absolute;
+    right: -21px;
+    top: -21px;
+  }
+  
   .content {
     min-width: 500px;
     min-height: 400px;

@@ -1,6 +1,6 @@
 .npc-trade{
   position: relative;
-  margin: auto;
+  margin: auto auto auto 150px;
 
   
   .close-button{
@@ -62,6 +62,10 @@
       .amount-section {
         display: flex;
         flex-direction: row;
+
+        .amount-style {
+          text-align: center;
+        }
       }
       .minmax-buttons {
         padding: 0 5px;

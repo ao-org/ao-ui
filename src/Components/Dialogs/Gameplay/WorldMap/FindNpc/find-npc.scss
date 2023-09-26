@@ -1,0 +1,112 @@
+.find-npc {
+  position: relative;
+  margin: auto;
+
+  .close-button{
+    position: absolute;
+    right: -21px;
+    top: -21px;
+  }
+
+  .header-line {
+    display: flex;
+    flex: row;
+    margin: 5px auto;
+    .game-dialog-header {
+      text-align: center;
+      font-weight: 900; 
+      margin-left: 10px;
+      font-size: 1rem;
+    }
+  }
+
+  .header-underline {
+    width: 100%;
+    height: 16px;
+    background-repeat: repeat-x;
+    background-image: url(../../../../../assets/Misc/divider_horizontal_big.png);
+  }
+  .search-area {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    .search-text {
+      margin: 0;
+    }
+    .search-input {
+      margin-left: 20px;
+    }
+  }
+
+  .result-area {
+    display: flex;
+    flex-direction: row;
+
+    .npc-list {
+      width: 200px;
+      height: 300px;
+      background-size: 100% 100%;
+      background-image: url('../../../../../assets/Backgrounds/leather_black.png');
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+
+      .npc-name {
+        margin: 2px;
+        font-family: "Alegra-Ao";
+      }
+
+      .selected-npc {
+        color: gold;
+      }
+    }
+
+    .map-list {
+      width: 300px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      .item-list {
+        flex-grow: 1;
+        overflow-y: scroll;
+      }
+      .list-header {
+        margin-top: 10px;
+      }
+      .element-line {
+        display: flex;
+        flex-direction: row;
+        font-family: 'Alegra-AO';
+        width: 100%;
+        overflow-y: scroll;
+        min-height: 20px;
+        
+        
+        .mapNumber {
+          margin: 0;
+          width: 10%;
+          margin-left: 5px;
+        }
+
+        .mapName {
+          margin: 0;
+          width: 40%;
+          text-align: center;
+        }
+
+        .world-name{
+          margin: 0;
+          width: 30%;
+          text-align: center;
+        }
+        .npcCount{
+          margin: 0;
+          width: 20%;
+          text-align: center;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+}

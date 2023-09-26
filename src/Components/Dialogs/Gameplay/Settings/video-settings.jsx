@@ -26,8 +26,6 @@ export const VideoSettingsTab = () => {
         </Section>
       </div>
       <div className="option-column">
-        <Section name={t('musicvolume').toUpperCase()}>
-        </Section>
       </div>
     </div>
 )}

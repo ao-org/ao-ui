@@ -1,0 +1,70 @@
+.clan-details-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin: 20px;
+  min-width: 380px;
+  max-width: 480px;
+
+  .details-box {
+    height: 100%;
+    background-size: 100% 100%;
+    background-image: url(../../../../assets/Misc/black-gradient.png);
+    background-repeat: no-repeat;
+    border-radius: 1rem;
+    padding: 3%;
+    position: relative;
+  }
+
+  .text {
+    font-size: 0.9rem;
+    font-family: 'Alegra-AO';
+  }
+  
+  .text-title {
+    font-size: 1rem;
+    font-family: 'Alegra-AO';
+    margin: 0;
+    opacity: 0.9;
+    padding: 2% 0;
+  }
+
+  .label {
+    padding: 0.2em;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.8;
+  }
+
+  .flag {
+    background-image: url(../../../../assets/Icons/Dialogs/aoshopcredits.png);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 79px;
+    height: 72px;
+  }
+
+  .description-box {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: 3%;
+  }
+
+  .text-input {
+    flex-grow: 1;
+    border-color: white;
+    background: transparent;
+    height: 100px;
+    border-width: 0.05rem;
+    color: white;
+    font-family: 'Alegra-AO';
+    resize: none;
+  }
+
+  .guardar {
+    margin-top: 2em;
+    cursor: pointer;
+  }
+}

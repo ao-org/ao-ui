@@ -121,7 +121,21 @@ const resources = {
       'characterBreading': 'Character breading',
       'fullScreen': 'Fullscreen',
       'floorItemInfo': 'Floor item info',
-      'fullInventoryNumber': 'Display full number on inventory'
+      'fullInventoryNumber': 'Display full number on inventory',
+      'clan-information': 'Clan information',
+      'founder': 'Founder',
+      'creation-date': 'Creation date',
+      'leader': 'Leader',
+      'members': 'Members',
+      'alignment': 'Alignment',
+      'clan-level': 'Clan level',
+      'admission-application': 'Admission application',
+      'request-admission': 'Request admission',
+      'reload-character-warning': 'For safety, reload your character after the transaction is complete.',
+      'decline': 'decline',
+      'search': 'Search',
+      'credits': 'Credits',
+      'details': 'Details'
     }
   },
   es: {
@@ -274,7 +288,24 @@ const resources = {
       'characterBreading': 'Respiracion de personajes',
       'fullScreen': 'Pantalla completa',
       'floorItemInfo': 'Informacion de items en el suelo',
-      'fullInventoryNumber': 'Mostrar numeros completos en el inventario'
+      'fullInventoryNumber': 'Mostrar numeros completos en el inventario',
+      'clan-information': 'Información del clan',
+      'founder': 'Fundador',
+      'creation-date': 'Fecha de creación',
+      'leader': 'Líder',
+      'members': 'Miembros',
+      'alignment': 'Alineación',
+      'clan-level': 'Nivel del clan',
+      'admission-application': 'Solicitud de ingreso',
+      'request-admission': 'Solicitar ingreso',
+      'reload-character-warning': 'Una vez realizada la transaccion, reloguee su personaje por seguridad.',
+      'deny': 'Rechazar',
+      'credits': 'Créditos',
+      'Amount': 'Cantidad',
+      'decline': 'Rechazar',
+      'search': 'Buscar',
+      'details': 'Detalles',
+      'price': 'Precio'
     }
   }
 };
