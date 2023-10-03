@@ -125,7 +125,7 @@ export const WorldMap = () => {
             <div className='continent-selector'>
             {
               Worlds.map( world => (
-                <AoButton key={world.index} styles={'testcheck stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}>{t(world.name)}</AoButton>
+                <AoButton key={world.index} styles={'continent-name stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}>{t(world.name)}</AoButton>
               ))
             }
             </div>
@@ -133,7 +133,7 @@ export const WorldMap = () => {
           <div className='search'>
             <h2 className='search-title'>Search Map</h2>
             <div className='search-input--container'>
-              <AoInput name="findMap" type="number"   styles='search-input'
+              <AoInput name="findMap" type="number"  styles='search-input'
                 min="1" max="10000" value={findMap} IsValid={true} handleChange={handleChange} />
             </div>
           </div>
