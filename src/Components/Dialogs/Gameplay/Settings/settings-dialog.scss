@@ -73,5 +73,46 @@
         margin: 10px;
       }
     }
+
+    .throw-selector-prop__control {
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      border: 2px solid #494943;
+      background-image: url(../../../../assets/background.png);
+      margin: 5px 5px;
+      padding: 0px 5px;
+      color: white;
+      &:hover {
+        border: none;
+      }
+    }
+    .throw-selector-prop__value-container {
+      &:focus-visible {
+        border: none;
+      }
+    }
+    .throw-selector-prop__menu {
+      
+      .throw-selector-prop__menu-list {
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        border: 1px solid #494943;
+        background-image: url(../../../../assets/background.png);
+        border-radius: 5px;
+        .throw-selector-prop__option{
+          color: white;
+          margin: 2px 5px;
+          text-align: center;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.096);
+          font-size: 0.95rem;
+          &:hover {
+            color: red;
+          }
+          &:focus {
+            color: red;
+          }
+        }
+      }
+    }
   }
 }

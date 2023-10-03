@@ -6,8 +6,9 @@ import './gameplay-options.scss'
 import Select from 'react-select';
 import { Slider } from "../../../Common/Slider/slider";
 import AoButton from "../../../Common/ao-button/ao-button";
-import { useSelector } from "react-redux";
-import { selectGameplaySettings } from "../../../../redux/GameplaySlices/GameSettings";
+import { useDispatch, useSelector } from "react-redux";
+import { selectGameplaySettings, updateGameplaySettings } from "../../../../redux/GameplaySlices/GameSettings";
+import { Actions, SettingType } from "../../../../constants";
 
 
 const ThrowSpellsOptions = [
@@ -17,12 +18,12 @@ const ThrowSpellsOptions = [
 ]
 
 const LanguageSettings = [
-  { value: 'en', label: 'English', index: 0},
+  { value: 'en', label: 'English', index: 2},
   { value: 'es', label: 'Español', index: 1}
 ]
 export const GameplayTab = () => {
-  const { t } = useTranslation();
-  
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch()
   const gameplaySettings = useSelector(selectGameplaySettings)
   const {
     copyDialogsEnabled,
@@ -30,13 +31,12 @@ export const GameplayTab = () => {
     blockSpellListScroll,
     throwSpellLockBehavior,
     mouseSens,
-    invertMouse,
+    language,
     userGraphicCursor,
     renderNpcText,
     tutorialEnabled
   } = gameplaySettings
-  const language = window.parent.BabelUI.GetStoredLocale()
-  const currentLanguage = LanguageSettings.find( e => (e.value === language))
+  const currentLanguage = LanguageSettings.find( e => (e.index === language))
   const throwSpellOpt = ThrowSpellsOptions.map( el => {
     return ({...el, label: t(el.label)})
   })
@@ -52,22 +52,34 @@ export const GameplayTab = () => {
   ]
   const tutorialOpt = tutorialOptions[tutorialEnabled ? 1 : 0]
   const handleChangeBox = evt => {
-    const { value, name } = evt.target;
+    const { name } = evt.target;
+    dispatch(updateGameplaySettings({...gameplaySettings, [name]: !gameplaySettings[name]}))
+    window.parent.BabelUI.UpdateIntSetting(SettingType[name], gameplaySettings[name] ? 0 : 1)
   }
   const updateThrowOption = evt => {
-    console.log(evt)
+    dispatch(updateGameplaySettings({...gameplaySettings, throwSpellLockBehavior: evt}))
+    window.parent.BabelUI.UpdateIntSetting(SettingType.throwSpellLockBehavior, evt)
   }
   const updateNpcText = evt => {
-    //evt.index
+    dispatch(updateGameplaySettings({...gameplaySettings, renderNpcText: evt.index > 0}))
+    window.parent.BabelUI.UpdateIntSetting(SettingType.renderNpcText, evt.index)
   }
   const updateTutorialOpt = evt => {
-    //evt.index
+    dispatch(updateGameplaySettings({...gameplaySettings, tutorialEnabled: evt.index > 0}))
+    window.parent.BabelUI.UpdateIntSetting(SettingType.tutorialEnabled, evt.index)
   }
   const updateLanguage = evt => {
-    console.log(evt)
+    dispatch(updateGameplaySettings({...gameplaySettings, language: evt.index}))
+    i18n.changeLanguage(evt.value)
+    window.parent.BabelUI.UpdateIntSetting(SettingType.language, evt.index)
   }
   const mouseSenseCahnge = newVal => {
-    
+    dispatch(updateGameplaySettings({...gameplaySettings, mouseSens: newVal}))
+    window.parent.BabelUI.UpdateIntSetting(SettingType.mouseSens, newVal)
+  }
+
+  const openKeySettings = evt => {
+    window.parent.BabelUI.RequestAction(Actions.OpenKeySettings)
   }
   return (
     <div className="gameplay-settings">
@@ -81,9 +93,8 @@ export const GameplayTab = () => {
         <AoCheckbox label={t('block-spell-list-scroll')} name="blockSpellListScroll" styles='chat-options' labelStyle='check-box-label' handleChange={handleChangeBox} state={blockSpellListScroll} />
       </Section>
       <Section name={t('mouse-sens').toUpperCase()}>
-        <Slider min={0} max={1000} currentValue={mouseSens} onChange={mouseSenseCahnge}/>
+        <Slider min={1} max={20} currentValue={mouseSens} onChange={mouseSenseCahnge}/>
         <div className="mouse-checkbox">
-        <AoCheckbox label={t('invert')} name="invertMouse" styles='chat-options' labelStyle='check-box-label' handleChange={handleChangeBox} state={invertMouse} />
         <AoCheckbox label={t('graphic-cursor')} name="userGraphicCursor" styles='chat-options' labelStyle='check-box-label' handleChange={handleChangeBox} state={userGraphicCursor} />
         </div>
       </Section>
@@ -103,6 +114,6 @@ export const GameplayTab = () => {
           </div>
         </div>        
       </Section>
-      <AoButton>{t('change-keysettings').toLocaleUpperCase()}</AoButton>
+      <AoButton onClick={openKeySettings}>{t('change-keysettings').toLocaleUpperCase()}</AoButton>
     </div>
   )}

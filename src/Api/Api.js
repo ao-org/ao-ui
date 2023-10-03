@@ -267,6 +267,7 @@ if (process.env.NODE_ENV === 'development') {
       console.log("move item from " + source + " to " + dest)
     },
     RequestAction: action => {
+      console.log("Request action " + action )
     },
     ClickMiniMapPos: (posX, posY) => {
       console.log(`click minimap at ${posX}, ${posY}` )
@@ -361,9 +362,8 @@ if (process.env.NODE_ENV === 'development') {
     },
     BuyPatronItem: (objIndex) => {
     },
-    UpdateBoolSetting: (settingType, newValue) => {
-    },
     UpdateIntSetting: (settingType, newValue) => {
+      console.log("Update setting: " + settingType + " new value: " + newValue)
     }
   } 
 }

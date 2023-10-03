@@ -29,7 +29,37 @@ export const Actions = {
   OpenSettings: 22,
   DisplayInventory: 23,
   DisplaySpells: 24,
-  SetMeditate: 25
+  SetMeditate: 25,
+  OpenKeySettings: 26,
+  SaveSettings: 27
+}
+
+export const SettingType = {
+  copyDialogsEnabled: 1,
+  writeAndMove: 2,
+  blockSpellListScroll: 3,
+  throwSpellLockBehavior: 4,
+  mouseSens: 5,
+  userGraphicCursor: 6,
+  language: 7,
+  renderNpcText: 8,
+  tutorialEnabled: 9,
+  showFps: 10,
+  moveGameWindow: 11,
+  characterBreathing: 12,
+  fullScreen: 13,
+  displayFloorItemInfo: 14,
+  displayFullNumbersInventory: 15,
+  enableBabelUI: 16,
+  enableMusic: 17,
+  enableFx: 18,
+  enableAmbient: 19,
+  sailFx: 20,
+  invertChannels: 21,
+  musicVolume: 22,
+  fxVolume: 23,
+  ambientVolume: 24,
+  lightSettings: 25
 }
 
 export const SafeLocks = {

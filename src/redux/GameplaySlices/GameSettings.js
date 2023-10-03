@@ -6,22 +6,22 @@ const defaultSettings = {
     copyDialogsEnabled: false,
     writeAndMove: false,
     blockSpellListScroll: false,
-    throwSpellLockBehavior: 0,
-    mouseSens: 0,
-    invertMouse: false,
+    throwSpellLockBehavior: 2,
+    mouseSens: 10,
     userGraphicCursor: false,
     language: 1,
     renderNpcText: false,
     tutorialEnabled: false
     },
     video: {
-      shopFps: false,
+      showFps: false,
       moveGameWindow: false,
       characterBreathing: false,
       fullScreen: false,
       displayFloorItemInfo: false,
       displayFullNumbersInventory: false,
-      enableBabelUI: false
+      enableBabelUI: false,
+      lightSettings: 1
     },
     audio: {
       enableMusic: false,
@@ -34,10 +34,6 @@ const defaultSettings = {
       ambientVolume: 0
     }
   },
-  spellListScrollLock: 0,
-  combatChat: 0,
-  spellMode: 0,
-  scrollDrag: 0,
   featureToggles: ['hotokey-enabled'],
   hideHotkeys: false
 }
@@ -56,11 +52,21 @@ export const GameSettingsSlice = createSlice({
     },
     setHideHotkeys: (state, action) => {
       state.hideHotkeys = action.payload
+    },
+    updateGameplaySettings: (state, action) => {
+      state.gameSettings.gameplay = action.payload
+    },
+    updateAudioSettings: (state, action) => {
+      state.gameSettings.audio = action.payload
+    },
+    updateVideoSettings: (state, action) => {
+      state.gameSettings.video = action.payload
     }
   },
 })
 
-export const { updateSettings, clearFeatureToggles, addFeatureToggle, setHideHotkeys } = GameSettingsSlice.actions
+export const { updateSettings, clearFeatureToggles, addFeatureToggle, setHideHotkeys,
+               updateGameplaySettings, updateAudioSettings, updateVideoSettings } = GameSettingsSlice.actions
 
 export const selectItemCountFormat = (state) => state.gameSettings.gameSettings.video.displayFullNumbersInventory
 export const selectSpellListScrollLock = (state) => state.gameSettings.gameSettings.gameplay.blockSpellListScroll

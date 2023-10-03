@@ -8,6 +8,7 @@ import { AudioSettingsTab } from './audio-settings-tab';
 import { VideoSettingsTab } from './video-settings';
 import { useDispatch } from 'react-redux';
 import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
+import { Actions } from '../../../../constants';
 
 export const SettingsDialog = ({settings}) => {
   const { t } = useTranslation();
@@ -18,6 +19,7 @@ export const SettingsDialog = ({settings}) => {
   const dispatch = useDispatch()
   const onClose = () => {
     dispatch(setGameActiveDialog(null))
+    window.parent.BabelUI.RequestAction(Actions.SaveSettings)
   }
   return (
   <AoDialog styles='settings-dialog' contentStyles='content'>
