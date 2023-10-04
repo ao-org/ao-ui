@@ -4,7 +4,7 @@ import './ao-input.scss';
 import { KeyCodeMapping } from '../../../constants';
 
 
-const AoInput = ({handleChange, IsValid, styles, inputStyles, imgStyles, innerRef, ...otherProps}) => {
+const AoInput = ({handleChange, IsValid, styles, inputStyles, imgStyles, innerRef, showDelete, showSearch, ...otherProps}) => {
   let errStyle = ''
   if (!IsValid) {
     errStyle = 'error '
@@ -46,8 +46,8 @@ const AoInput = ({handleChange, IsValid, styles, inputStyles, imgStyles, innerRe
       onDoubleClick={selectAllText}
       {...otherProps} 
     />
-    {otherProps.value ?
-      <img 
+    {(showDelete ?? false) &&
+      <img
         alt='delete input'
         className={'input-img ' + imgStyles}
         src={require('../../../assets/Icons/Dialogs/cancel.png')}
@@ -57,7 +57,8 @@ const AoInput = ({handleChange, IsValid, styles, inputStyles, imgStyles, innerRe
           inputElement.current?.focus()
         }}
       />
-      :
+    }
+    {(showSearch ?? false) && !showDelete &&
       <img 
         alt='search'
         className={'input-img ' + imgStyles}
@@ -65,6 +66,7 @@ const AoInput = ({handleChange, IsValid, styles, inputStyles, imgStyles, innerRe
         sizes='2px 2px'
       />
     }
+    
   </div>
 )}
 

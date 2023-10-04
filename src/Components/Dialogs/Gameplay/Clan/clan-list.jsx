@@ -66,6 +66,8 @@ export default function ClanListDialog({styles, stylesDetail}) {
               handleChange={(e) => setSearch(e.target.value)} 
               inputStyles={'search-input'}
               imgStyles={'search-img'}
+              showDelete={search}
+              showSearch={true}
             />
             <div className='select'>
               <label for='Alineacion' >Alineación</label>
