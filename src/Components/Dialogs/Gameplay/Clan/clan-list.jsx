@@ -50,7 +50,10 @@ export default function ClanListDialog({styles, stylesDetail}) {
   return (
     <AoDialog styles={styles}>
       <div className="clan-list-dialog">
-        <h2>CLANES</h2>
+        <div className='title'>
+          <img className='frame-sep' src={require('../../../../assets/Icons/Dialogs/clan-flag.png')} />
+          <h2>CLANES</h2>
+        </div>
         <img className='frame-sep' src={require('../../../../assets/frame/top-center.jpg')} />
         <div className='list-box'>
           <div className='filters'>

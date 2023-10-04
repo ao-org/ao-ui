@@ -4,8 +4,21 @@
   min-width: 580px;
   max-width: 680px;
 
-  h2 {
-    text-align: center;
+  .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      text-align: center;
+    }
+
+    img {
+      height: 100%;
+      width: 40px;
+      margin-right: 1rem;
+    }
   }
 
   .frame-sep{
