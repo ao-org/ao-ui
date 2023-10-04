@@ -18,10 +18,9 @@ export default function TopBar({styles}) {
     window.parent.BabelUI.RequestAction(Actions.Minimize)
   }
   const openSettings = evt => {
-    // dispatch(setGameActiveDialog({
-    //   popUp:'settings'
-    // })) 
-    window.parent.BabelUI.RequestAction(Actions.OpenSettings)
+    dispatch(setGameActiveDialog({
+      popUp:'settings'
+    })) 
   }
   
   const showHelp = evt => {

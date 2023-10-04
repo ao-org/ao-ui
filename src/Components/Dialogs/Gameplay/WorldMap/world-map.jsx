@@ -114,10 +114,31 @@ export const WorldMap = () => {
   return (
     <AoDialog styles='world-map' contentStyles='content'>
       <div className='header-line'>
-        <img src={require('../../../../assets/Icons/Dialogs/AOShopIcon.png')}/>
-        <h1 className='game-dialog-header'>{t('worldmap').toUpperCase()}</h1>
+        <div className='header-content'>
+          <img src={require('../../../../assets/Icons/Dialogs/WorldmapIcon.png')}/>
+          <h1 className='game-dialog-header'>{t('world map').toUpperCase()}</h1>
+        </div>
+        <span className='header-underline'></span>
+        <div className='header-navbar'>
+          <div className='continent'>
+            <h2 className='continent-title'>Continent</h2>
+            <div className='continent-selector'>
+            {
+              Worlds.map( world => (
+                <AoButton key={world.index} styles={'testcheck stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}>{t(world.name)}</AoButton>
+              ))
+            }
+            </div>
+          </div>
+          <div className='search'>
+            <h2 className='search-title'>Search Map</h2>
+            <div className='search-input--container'>
+              <AoInput name="findMap" type="number"   styles='search-input'
+                min="1" max="10000" value={findMap} IsValid={true} handleChange={handleChange} />
+            </div>
+          </div>
+        </div>
       </div>
-      <span className='header-underline'></span>
       <AoButton styles='close-button' onClick={onClose}>
         <img src={require('../../../../assets/Icons/gameplay/ico_close.png')}></img>
       </AoButton>
@@ -148,6 +169,7 @@ export const WorldMap = () => {
           </Frame>
         </div>
         <div className='side-bar-area'>
+          <h2 className='map-title'>Current Map</h2>
           <p className='map-name'>{selectedMapDetails.name}</p>
           <Frame contentStyles='npc-info'>
             {
@@ -172,31 +194,31 @@ export const WorldMap = () => {
             }
           </Frame>
           <p className='npc-details-tittle'>{t('Details')}</p>
-          <Frame contentStyles='npc-info'>
+          <Frame contentStyles='npc-info'></Frame>
 
-          </Frame>
-          <div className='search-map'>
-            <p className='find-map-title'>{t('Find Map')}</p>
-            <AoInput name="findMap" type="number"   styles='search-input'
-              min="1" max="10000" value={findMap} IsValid={true} handleChange={handleChange} />
-            <GameBarButton>
-              <img src={require('../../../../assets/Icons/gameplay/ico_gear.png')}></img>
-            </GameBarButton>
+
+          <div className='npc-preview-container'>
+            <Frame contentStyles='npc-preview'></Frame>
           </div>
+
           <AoButton styles='search-npc-button' onClick={openNpcSearch}>{t('search-npc')}</AoButton>
-          <p className='npc-details-tittle'>{t('Markers')}</p>
-          <AoCheckbox label={t('map-number')} 
-            name="showMapNumbers" 
-            styles='markers-ops' 
-            labelStyle='marker-label' 
-            handleChange={ (evt) => handleChange(evt, !showMapNumbers)} 
-            state={showMapNumbers} />
-          <AoCheckbox label={t('display-safe-unsafe')} 
-            name="displaySafeUnsafe" 
-            styles='markers-ops' 
-            labelStyle='marker-label' 
-            handleChange={(evt) => handleChange(evt, !displaySafeUnsafe)} 
-            state={displaySafeUnsafe} />
+          <div className='markers-container'>
+            <p className='npc-details-tittle'>{t('Markers')}</p>
+            <div className='markers-content--container'>
+              <AoCheckbox label={t('Map numbers')}
+                name="showMapNumbers"
+                styles='markers-ops'
+                labelStyle='marker-label'
+                handleChange={ (evt) => handleChange(evt, !showMapNumbers)}
+                state={showMapNumbers} />
+              <AoCheckbox label={t('Safe-unsafe')}
+                name="displaySafeUnsafe"
+                styles='markers-ops'
+                labelStyle='marker-label'
+                handleChange={(evt) => handleChange(evt, !displaySafeUnsafe)}
+                state={displaySafeUnsafe} />
+            </div>
+          </div>
         </div>
       </div>
       <ErrorBoundary compName="map popups">

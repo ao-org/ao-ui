@@ -3,28 +3,26 @@ import './slider.scss'
 import { MouseButtons } from '../../../constants'
 
 export const Slider = ({min, max, currentValue, onChange}) => {
-  const posPercent = ((currentValue - min) / (max - min)) * 100
+  const range = max - min
+  const posPercent = ((currentValue - min) / (range)) * 100
   const sliderStype = {
     left: `${posPercent}%`,
   }
-
   const selector = useRef(null)
   const sliderLine = useRef(null)
+  const updatePos = (posX) => {
+    const clientRect = sliderLine.current.getBoundingClientRect()
+    const localX = posX - clientRect.x;
+    onChange( Math.min(Math.max(localX / clientRect.width * range + min, min), max))
+  }
   const onMouseDown = evt => {
     if (evt.button === MouseButtons.left) {
-      const clientRect = sliderLine.current.getBoundingClientRect()
-      const localX = evt.clientX - clientRect.x;
-      const localY = evt.clientY - clientRect.y;
-      onChange(localX / clientRect.width * max)
-    }
-    
+      updatePos(evt.clientX)
+    }    
   }
   const onMouseMove = evt => {
     if (evt.buttons > 0 ) {
-      const clientRect = sliderLine.current.getBoundingClientRect()
-      const localX = evt.clientX - clientRect.x;
-      const localY = evt.clientY - clientRect.y;
-      onChange(localX / clientRect.width * max)
+      updatePos(evt.clientX)
     }
   }
   return (

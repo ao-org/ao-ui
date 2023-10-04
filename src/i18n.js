@@ -95,7 +95,6 @@ const resources = {
       'no-Lock': "Don't Lock",
       'lock-throw': "Lock on release",
       'lock-cast': "Lock on Cast",
-      'invert': 'Invert Mouse',
       'graphic-cursor' : 'Use rendered cursor',
       'interface-language' : 'Language',
       'other': 'Other',
@@ -135,7 +134,13 @@ const resources = {
       'decline': 'decline',
       'search': 'Search',
       'credits': 'Credits',
-      'details': 'Details'
+      'details': 'Details',
+      'enableExperimentalUI': "Use experimental interface",
+      'must-restart-for-changes': "You must restart the game for the changes to take effect.",
+      'time-light': "Time light",
+      'day': 'Day',
+      'night': 'Night',
+      'light-state': "Lighting"
     }
   },
   es: {
@@ -262,8 +267,7 @@ const resources = {
       'no-Lock': "Sin bloqueo",
       'lock-throw': "Bloqueo en soltar",
       'lock-cast': "Bloqueo al lanzar",
-      'invert': 'Invertir',
-      'graphic-cursor' : 'User cursores graficos',
+      'graphic-cursor' : 'Usar cursores graficos',
       'interface-language' : 'Idioma de la interfaz',
       'other': 'Otros',
       'Npc-text': 'Texto Npcs',
@@ -305,7 +309,13 @@ const resources = {
       'decline': 'Rechazar',
       'search': 'Buscar',
       'details': 'Detalles',
-      'price': 'Precio'
+      'price': 'Precio',
+      'enableExperimentalUI': "Usar interfaz experimental",
+      'must-restart-for-changes': "Deberas reiniciar el juego para que los cambios tengan efecto.",
+      'time-light': "Luz horaria",
+      'day': 'Día',
+      'night': 'Noche',
+      'light-state': "Iluminacion"
     }
   }
 };

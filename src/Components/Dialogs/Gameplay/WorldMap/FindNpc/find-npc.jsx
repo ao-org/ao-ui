@@ -13,12 +13,19 @@ export const FindNpc = ({onClose, onSelectMap}) => {
 
   const npcList = Array(1000).fill({name:''}).map( (el, index) => ({name:' Npc ' + index, id: index}))
 
-  const filteredList = npcList.filter( el => (
-    el.name.includes(search)
-  ))
+  const searchTerm = search.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase()
+  const filteredList = npcList.filter( e => 
+    e.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleUpperCase().includes(searchTerm)
+  )
+
+  const mapList = Array(100).fill({}).map( (el, index) => ({name:'mapName' + index, id: index}))
   const handleChange = event => {
     const { value, name } = event.target;
     setDialogState({ ...dialogState, [name]: value});
+  }
+
+  const selectNpc = npcInfo => {
+    setDialogState({ ...dialogState, selectedIndex: npcInfo.index});
   }
   return (
     <AoDialog styles='find-npc' contentStyles='content'>
@@ -39,12 +46,29 @@ export const FindNpc = ({onClose, onSelectMap}) => {
         <Frame contentStyles='npc-list'>
         {
           filteredList.map( (el, index) => (
-            <p className='npc-name'>{el.name}</p>
+            <p className={'npc-name ' + ( el.index === selectedIndex ? 'selected-npc' : '')} onClick={ () => selectNpc(el)}>{el.name}</p>
           ))
         }
         </Frame>
         <Frame contentStyles='map-list'>
-      
+          <div className='element-line list-header'>
+            <p className='mapNumber header-style'>{t('map').toLocaleUpperCase()}</p>
+            <p className='mapName header-style'>{t('name').toLocaleUpperCase()}</p>
+            <p className='world-name header-style'>{t('area').toLocaleUpperCase()}</p>
+            <p className='npcCount header-style'>{t('amount').toLocaleUpperCase()}</p>
+          </div>
+          <div className='item-list'>
+           {
+              mapList.map( el => (
+                <div className={'element-line ' + (el.objIndex === selectedIndex ? 'selected-shop-item' : '')}>
+                  <p className='mapNumber'>{512}</p>
+                  <p className='mapName'>{'costa sur de algun mapa'}</p>
+                  <p className='world-name'>{'Argentum'}</p>
+                  <p className='npcCount'>{5}</p>
+                </div>
+              ))
+           }
+          </div>
         </Frame>
       </div>
     </AoDialog>

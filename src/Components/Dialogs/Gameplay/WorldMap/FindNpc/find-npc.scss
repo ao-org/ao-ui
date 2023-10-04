@@ -55,11 +55,57 @@
         margin: 2px;
         font-family: "Alegra-Ao";
       }
+
+      .selected-npc {
+        color: gold;
+      }
     }
 
     .map-list {
       width: 300px;
       height: 300px;
+      display: flex;
+      flex-direction: column;
+      .item-list {
+        flex-grow: 1;
+        overflow-y: scroll;
+      }
+      .list-header {
+        margin-top: 10px;
+      }
+      .element-line {
+        display: flex;
+        flex-direction: row;
+        font-family: 'Alegra-AO';
+        width: 100%;
+        overflow-y: scroll;
+        min-height: 20px;
+        
+        
+        .mapNumber {
+          margin: 0;
+          width: 10%;
+          margin-left: 5px;
+        }
+
+        .mapName {
+          margin: 0;
+          width: 40%;
+          text-align: center;
+        }
+
+        .world-name{
+          margin: 0;
+          width: 30%;
+          text-align: center;
+        }
+        .npcCount{
+          margin: 0;
+          width: 20%;
+          text-align: center;
+          margin-right: 5px;
+        }
+      }
     }
   }
 

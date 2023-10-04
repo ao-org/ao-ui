@@ -70,7 +70,7 @@ export const NpcTrade = ({settings}) => {
   const selectMax = () => {
     if (state.selectedInventory === InventoryType.Npc) {
       setState({ ...state, 
-        amount: Math.min(npsList[state.selectedIndex].count, userGold / state.selectedItemValue)
+        amount: Math.min(npsList[state.selectedIndex].count, Math.trunc(userGold / state.selectedItemValue))
       });
     }
     else if (state.selectedInventory === InventoryType.User) {
@@ -97,7 +97,7 @@ export const NpcTrade = ({settings}) => {
     window.parent.BabelUI.BuyItem(state.selectedIndex, state.amount)
   }
   const itemCount = state.selectedInventory === InventoryType.Npc ? state.amount : Math.min(state.amount, userList[state.selectedIndex].count)
-  const price = Math.round(state.selectedItemValue *  itemCount)
+  const price = Math.trunc(state.selectedItemValue *  itemCount)
   return (
     <AoDialog styles='npc-trade' contentStyles='content'>
       <div className='header-line'>
