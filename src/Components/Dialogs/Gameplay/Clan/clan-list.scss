@@ -47,38 +47,21 @@
         border: 2px solid #494943;
       }
 
-      .search {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: start;
-        position: relative;
+
+      .search-input {
+        border: none;
+        outline: none;  
+        width: 15rem;
+        height: 90%;
+        font-size: 0.9rem;
         background-color: black;
-        
-
-
-        input {
-          border: none;
-          outline: none;  
-          width: 15rem;
-          font-size: 0.9rem;
-          padding: 0.1rem 0.2rem;
-          background-color: black;
-          color: white;
-          z-index: 1;
-          font-family: Alegra-AO;
-        }
-
-        img {
-          position: absolute;
-          right: 0;
-          cursor: pointer;
-          height: 15px;
-          width: 15px;
-          z-index: 2;
-          padding: 0.1rem;
-        }
+        font-family: Alegra-AO;
       }
+
+      .search-img {
+        padding: 0.1rem;
+      }
+    
 
       .select {
         display: flex;

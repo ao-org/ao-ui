@@ -8,6 +8,7 @@
   padding: 1px;
   font-family: Cardo, Arial;
   display: flex;
+  align-items: center;
   &:focus-within {
     box-shadow: 0px 0px 8px 1px rgb(65 159 255 / 20%);
   }
@@ -24,7 +25,15 @@
       outline: none;
     }
   }
+
+  .input-img {
+    position: absolute;
+    right: 0;
+    height: 15px;
+    width: 15px;
+    z-index: 2;
+  }
 }
 .error {
-  border: 2px solid #330c11;
+  border: 2px solid  #330c11;
 }

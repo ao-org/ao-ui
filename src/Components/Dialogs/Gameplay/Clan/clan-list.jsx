@@ -3,6 +3,7 @@ import AoDialog from "../../../Common/ao-dialog/ao-dialog";
 import AoButton from '../../../Common/ao-button/ao-button';
 import ClanDetailsDialog from './clan-details-dialog';
 import { useState, useRef } from 'react';
+import AoInput from '../../../Common/ao-input/ao-input';
 
 const Alineaciones = {
   'neutral': 'Neutral',
@@ -57,26 +58,17 @@ export default function ClanListDialog({styles, stylesDetail}) {
         <img className='frame-sep' src={require('../../../../assets/frame/top-center.jpg')} />
         <div className='list-box'>
           <div className='filters'>
-          <div className='btn search'>
-              <input ref={inputRef} type='text' placeholder='Busca tu clan' onChange={(e) => setSearch(e.target.value)} value={search}/>
-              {search ?
-                  <img 
-                    alt='search' 
-                    src={require(`../../../../assets/Icons/Dialogs/cancel.png`)}
-                    onClick={(e) => {
-                      console.log(1)
-                      e.stopPropagation()
-                      e.preventDefault()
-                      setSearch('')
-                      inputRef.current?.focus()
-                    }}
-                  />
-                  :
-                  <img alt='search' src={require(`../../../../assets/Icons/Dialogs/glass.png`)} sizes='2px 2px'/>
-                }
-                </div>
+            <AoInput 
+              styles={'btn'} 
+              placeholder='Busca tu clan' 
+              name="search" 
+              value={search} 
+              handleChange={(e) => setSearch(e.target.value)} 
+              inputStyles={'search-input'}
+              imgStyles={'search-img'}
+            />
             <div className='select'>
-            <label for='Alineacion' >Alineación</label>
+              <label for='Alineacion' >Alineación</label>
               <select 
                 id='Alineacion' 
                 className="btn alineacion" 
