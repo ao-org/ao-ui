@@ -2,7 +2,11 @@
   position: relative;
   margin: auto;
 
-  .close-button{
+  .dialog-container {
+    z-index: 100;
+  }
+
+  .close-button {
     position: absolute;
     right: -21px;
     top: -21px;
@@ -12,15 +16,17 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
+
     .header-content {
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 1;
     }
+
     .game-dialog-header {
       margin: 0;
-      font-weight: 900; 
+      font-weight: 900;
       font-size: 1rem;
     }
   }
@@ -40,35 +46,56 @@
     align-items: center;
     width: 74%;
     font-family: 'Alegra-AO';
+
     .continent-title,
-    .search-title{
+    .search-title {
       font-size: 0.875rem;
       color: gold;
       text-align: center;
       margin: 0;
     }
-    .continent,
-    .search {
-      width: 50%;
+
+    .continent {
+      width: 60%;
     }
+
+    .search {
+      width: 40%;
+    }
+
     .continent-selector {
       display: flex;
       justify-content: space-around;
+
       .continent-selector--title {
         font-size: 0.75rem;
         font-family: 'Alegra-AO';
         color: white;
         margin: 0;
       }
+
+      .world-name {
+        letter-spacing: 0.8px;
+      }
+
       .testcheck {
         font-family: 'Alegra-AO';
         font-size: 0.75rem;
-        padding: 1px 16px;
+        padding: 1px 22px;
       }
     }
+
     .search-input--container {
       display: flex;
       justify-content: center;
+    }
+
+    .search-input {
+      width: 64%;
+
+      .form-input {
+        width: 100%;
+      }
     }
   }
 
@@ -79,24 +106,15 @@
     .map-area {
       display: flex;
       flex-direction: row;
+
       .world-selector {
         display: none;
-        flex-direction: column;
-        margin: 10px 1px 0px 10px;
-        .unselected {
-          color: #ffffff70;
-          border: 2px solid #21221F;
-        }
-        .selected {
-          border: 2px solid #686865;
-          color: white;
-          background-image: url(../../../../assets/Buttons/button_gray_over.png);
-        }
       }
+
       .map-grid-frame {
         margin: 0px;
         position: relative;
-        
+
         .grid-layer {
           position: absolute;
           width: 100%;
@@ -106,20 +124,25 @@
           top: 0;
           left: 0;
         }
+
         .grid-element {
           display: flex;
         }
+
         .selected-grid-element {
           border: 1px solid white;
           box-sizing: border-box;
         }
+
         .grid-number {
           margin: auto;
         }
+
         .safe-area {
           background-color: rgba(127, 255, 212, 0.447);
         }
-        .unsafe-area {
+
+        .unsafe-area {     
           background-color: rgba(220, 20, 60, 0.301);
         }
       }
@@ -128,6 +151,7 @@
         margin: 10px 10px 10px 10px;
       }
     }
+
     .side-bar-area {
       display: flex;
       flex-direction: column;
@@ -135,9 +159,7 @@
       margin: 10px;
       margin-top: -28px;
 
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
+      .zone-title {
         margin: 0;
         text-align: center;
         font-size: 0.875rem;
@@ -145,56 +167,63 @@
         color: gold;
       }
 
-      .map-title {
-        margin: 0;
+      .zone-name {
         text-align: center;
-        font-size: 0.875rem;
-        font-family: 'Alegra-AO';
-        color: gold;
-      }
-
-      .map-name {
-        text-align: center;
-        margin-top: 10px;
+        margin-top: 2px;
+        margin-bottom: 4px;
         color: white;
         font-family: 'Alegra-AO';
         font-weight: 600;
       }
+
       .npc-info {
         width: 100%;
         height: 100px;
         overflow-y: scroll;
       }
+
+      .npc-details-frame {
+        height: 165px;
+      }
+
       .npc-preview-container {
-        margin: 1rem auto;
+        margin: 1rem auto 0.4rem auto;
         width: 80%;
       }
+
       .npc-preview {
         width: 100%;
         height: 100px;
       }
+
       .npc-list-title {
         display: flex;
         flex-direction: row;
         margin: 5px;
       }
+
       .npc-list-name {
         flex-grow: 1;
         font-family: 'Alegra-AO';
       }
+
       .npc-list-count {
         font-family: 'Alegra-AO';
         margin: auto;
       }
+
       .npc-header-line {
+        font-weight: bold;
         font-size: 0.7rem;
         color: gold;
         margin-bottom: 2px;
       }
+
       .selected-npc {
         color: gold;
       }
-      .no-npc-found{
+
+      .no-npc-found {
         width: 100%;
         color: gold;
         font-family: 'Alegra-AO';
@@ -220,28 +249,85 @@
           margin: auto;
         }
       }
+
       .search-npc-button {
+        font-family: 'Alegra-AO';
+        font-size: 0.75rem;
+
         width: 70%;
         margin: 0 auto;
+
       }
-      .markers-container {
-        margin-top: 15px;
-        .markers-content--container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+
+      .markers-title {
+        margin-top: 10px;
+        margin-bottom: 2px;
+      }
+
+      .markers-frame {
+        background-image: url(../../../../assets/frames/boxmap/leather_dark.png);
+        .markers-container {
+          background-image: url(../../../../assets/frames/boxmap/leather_dark.png);
+          .markers-content--container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            padding: 0 5px;
+          }
+
+          .markers-ops {
+            margin-right: 6px;
+            display: flex;
+            input {
+              margin-right: 4px;
+            }
+          }
+
+          .marker-label {
+            font-family: 'Alegra-AO';
+            font-size: 0.75rem;
+            font-weight: 400;
+          }
         }
-        .markers-ops {
-          margin-top: 8px;
-          display: flex;
-          width: 50%;
-        }
-        .marker-label {
-          font-family: 'Alegra-AO';
-          font-size: 0.75rem;
-        }
+        // input[type=checkbox] {
+        //   display: none;
+        // }
       }
 
     }
   }
+    .search-input input[type="number"] {
+      -webkit-appearance: textfield;
+      -moz-appearance: textfield;
+      appearance: textfield;
+      font-weight: 400;
+    }
+
+  .button-container,
+  .search-input {
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    padding: 3px;
+    border: none;
+    box-shadow: none;
+    background-image: url(../../../../assets/Buttons/button_map.png);
+
+    &:hover {
+      padding: 3px;
+      border: none;
+      background-image: url(../../../../assets/Buttons/button_map_over.png);
+    }
+  }
+
+  .search-input:hover {
+    background-image: url(../../../../assets/Buttons/button_map.png);
+  }
+
+  .button-container.selected {
+    color: gold !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    background-image: url(../../../../assets/Buttons/button_map_off.png);
+  }
+
 }

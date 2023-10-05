@@ -4,6 +4,8 @@ import AoDialog from '../../../Common/ao-dialog/ao-dialog'
 import { useDispatch } from 'react-redux';
 import { setGameActiveDialog } from '../../../../redux/GameplaySlices/GameStateSlice';
 import './world-map.scss';
+import FrameMap from './FrameMap/framemap'
+import FrameNpc from './FrameNpc/framenpc'
 import Frame from '../../../Common/Frame/frame';
 import { useState } from 'react';
 import { GetRootDirectory } from '../../../../Tools/Utils';
@@ -125,15 +127,15 @@ export const WorldMap = () => {
             <div className='continent-selector'>
             {
               Worlds.map( world => (
-                <AoButton key={world.index} styles={'testcheck stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}>{t(world.name)}</AoButton>
+                <AoButton key={world.index} styles={'testcheck stats-opt-button ' + (activeWorld === world.index ? 'selected' : 'unselected')} onClick={() => onChangeWorld(world)}><span className='world-name'>{t(world.name)}</span></AoButton>
               ))
             }
             </div>
           </div>
           <div className='search'>
-            <h2 className='search-title'>Search Map</h2>
+            <h2 className='search-title'>Search zone</h2>
             <div className='search-input--container'>
-              <AoInput name="findMap" type="number"   styles='search-input'
+              <AoInput name="findMap" type="number"   styles='search-input search-selected'
                 min="1" max="10000" value={findMap} IsValid={true} handleChange={handleChange} />
             </div>
           </div>
@@ -169,9 +171,9 @@ export const WorldMap = () => {
           </Frame>
         </div>
         <div className='side-bar-area'>
-          <h2 className='map-title'>Current Map</h2>
-          <p className='map-name'>{selectedMapDetails.name}</p>
-          <Frame contentStyles='npc-info'>
+          <h2 className='zone-title'>Current zone</h2>
+          <p className='zone-name'>{selectedMapDetails.name}</p>
+          <FrameMap contentStyles='npc-info'>
             {
               selectedMapDetails.npcList.length > 0 ?
               <>
@@ -192,33 +194,35 @@ export const WorldMap = () => {
               :
               <p className='no-npc-found'>{t('no-npc-found')}</p>
             }
-          </Frame>
+          </FrameMap>
           <p className='npc-details-tittle'>{t('Details')}</p>
-          <Frame contentStyles='npc-info'></Frame>
+          <FrameMap contentStyles='npc-info npc-details-frame'></FrameMap>
 
 
           <div className='npc-preview-container'>
-            <Frame contentStyles='npc-preview'></Frame>
+            <FrameNpc contentStyles='npc-preview'></FrameNpc>
           </div>
 
-          <AoButton styles='search-npc-button' onClick={openNpcSearch}>{t('search-npc')}</AoButton>
-          <div className='markers-container'>
-            <p className='npc-details-tittle'>{t('Markers')}</p>
-            <div className='markers-content--container'>
-              <AoCheckbox label={t('Map numbers')}
-                name="showMapNumbers"
-                styles='markers-ops'
-                labelStyle='marker-label'
-                handleChange={ (evt) => handleChange(evt, !showMapNumbers)}
-                state={showMapNumbers} />
-              <AoCheckbox label={t('Safe-unsafe')}
-                name="displaySafeUnsafe"
-                styles='markers-ops'
-                labelStyle='marker-label'
-                handleChange={(evt) => handleChange(evt, !displaySafeUnsafe)}
-                state={displaySafeUnsafe} />
+          <AoButton styles='search-npc-button' onClick={openNpcSearch}>{t('Search NPC')}</AoButton>
+              <p className='npc-details-tittle markers-title'>{t('Markers')}</p>
+          <FrameMap styles='markers-frame'>
+            <div className='markers-container'>
+              <div className='markers-content--container'>
+                <AoCheckbox label={t('Map numbers')}
+                  name="showMapNumbers"
+                  styles='markers-ops'
+                  labelStyle='marker-label'
+                  handleChange={ (evt) => handleChange(evt, !showMapNumbers)}
+                  state={showMapNumbers} />
+                <AoCheckbox label={t('Safe-unsafe')}
+                  name="displaySafeUnsafe"
+                  styles='markers-ops'
+                  labelStyle='marker-label'
+                  handleChange={(evt) => handleChange(evt, !displaySafeUnsafe)}
+                  state={displaySafeUnsafe} />
+              </div>
             </div>
-          </div>
+          </FrameMap>
         </div>
       </div>
       <ErrorBoundary compName="map popups">

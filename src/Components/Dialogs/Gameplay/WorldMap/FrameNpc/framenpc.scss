@@ -1,0 +1,86 @@
+.frame-npc {
+    position: relative;
+    display: flex;
+    margin: 0px;
+    .frame-content {
+      margin: 9px;
+      background-image: url(../../../../../assets/Backgrounds/leather_brown.png);
+      background-size: 100% 100%;
+      position: relative;
+    }
+  
+    .frame-line-container {
+      display: flex;
+      flex-direction: row;
+      left:0;
+      right: 0;
+      .frame-center {
+        position: relative;
+        flex-grow: 1;
+        height: 9px;
+        background-repeat: repeat-x;
+      }
+      .image-top {
+        top: 3.5px;
+        background-image: url(../../../../../assets/frames/boxmap/boxnpc/top.png);
+        
+      }
+  
+      .corners {
+          z-index: 1;
+      }
+      .image-bottom {
+          bottom: -30px;
+        background-image: url(../../../../../assets/frames/boxmap/boxnpc/bottom.png);
+      }
+    }
+  
+    .frame-top {
+      position: absolute;
+      top: 0px;
+      width: 100%;
+    }
+    .frame-bottom {
+      position: absolute;
+      bottom:0px;
+      width: 100%;
+    }
+    .frame-right {
+      position: absolute;
+      right: -7px;
+      height: 100%;
+    }
+    .frame-left {
+      position: absolute;
+      left: 0px;
+      height: 100%;
+    }
+    .left-image {
+      left: 4px;
+    }
+    .vertical {
+      flex-direction: column;
+    }
+    
+    .frame-side-container {
+      position: absolute;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 0px;
+      bottom: 0;
+      top:0;
+      
+      .frame-center {
+        position: relative;
+        flex-grow: 1;
+        background-image: url(../../../../../assets/frames/boxmap/boxnpc/left.png);
+        width: 1px;
+        background-repeat: 'repeat-y';
+      }
+      .right-image{
+        right: -23px;
+        background-image: url(../../../../../assets/frames/boxmap/boxnpc/right.png),
+      }
+    }
+  }
