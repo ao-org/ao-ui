@@ -133,7 +133,7 @@ export const WorldMap = () => {
             </div>
           </div>
           <div className='search'>
-            <h2 className='search-title'>Search zone</h2>
+            <h2 className='search-title'>{t('Search zone')}</h2>
             <div className='search-input--container'>
               <AoInput name="findMap" type="number"   styles='search-input search-selected'
                 min="1" max="10000" value={findMap} IsValid={true} handleChange={handleChange} />
@@ -171,7 +171,7 @@ export const WorldMap = () => {
           </Frame>
         </div>
         <div className='side-bar-area'>
-          <h2 className='zone-title'>Current zone</h2>
+          <h2 className='zone-title'>{t('Current zone')}</h2>
           <p className='zone-name'>{selectedMapDetails.name}</p>
           <FrameMap contentStyles='npc-info'>
             {
