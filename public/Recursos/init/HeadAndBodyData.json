@@ -15,12 +15,12 @@
 "Elf":{
 	"stats": [18, 20 ,20, 20, 19],
 	"male":{
-		"body":21,
+		"body":510,
 		"start": 101,
 		"end": 132
 	},
 	"female": {
-		"body":39,
+		"body":511,
 		"start": 150,
 		"end": 179
 	}
@@ -41,12 +41,12 @@
 "Dwarf":{
 	"stats": [21, 18 ,15, 16, 21],
 	"male":{
-		"body":1174,
+		"body":53,
 		"start": 300,
 		"end": 329
 	},
 	"female": {
-		"body":2699,
+		"body":60,
 		"start": 350,
 		"end": 379
 	}
@@ -54,12 +54,12 @@
 "Gnome":{
 	"stats": [16, 21 , 22, 21, 18],
 	"male":{
-		"body":1174,
+		"body":508,
 		"start": 400,
 		"end": 429
 	},
 	"female": {
-		"body":2699,
+		"body":509,
 		"start": 450,
 		"end": 479
 	}
@@ -67,12 +67,12 @@
 "Orc":{
 	"stats": [22, 17 ,17, 15, 20],
 	"male":{
-		"body":2549,
+		"body":249,
 		"start": 500,
 		"end": 529
 	},
 	"female": {
-		"body":2707,
+		"body":248,
 		"start": 550,
 		"end": 579
 	}
