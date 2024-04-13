@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## BabelUI - Engine to run React.js in VB6
+This project works in Visual Basic 6 thanks to the following:
+https://github.com/ao-org/BabelUI
+
 ## Available Scripts
 
 In the project directory, you can run:
