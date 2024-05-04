@@ -58,7 +58,7 @@ const getBody = (bodyList, gender, race) => {
 }
 const getCityList = () => {
   return [
-    'Ullathorpe', 'Nix', 'Banderbill', 'Lindos', 'Arghal'
+    'Ullathorpe', 'Nix', 'Banderbill', 'Lindos', 'Arghal', 'Forgat'
   ]
 }
 
